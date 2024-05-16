@@ -1,7 +1,30 @@
 {
-  "name": "moes-media-components",
+  "name": "@moes-media/components",
   "packageManager": "yarn@4.2.2",
   "workspaces": [
-    "packages/*"
-  ]
+    "apps/*",
+    "packages/*",
+    "scripts/*"
+  ],
+  "scripts": {
+    "build": "turbo run --concurrency=4 build",
+    "clean": "turbo run clean",
+    "coverage": "turbo run --concurrency=4 coverage",
+    "coverage:ci": "turbo run --concurrency=2 coverage -- --maxWorkers=2 --forceExit",
+    "format": "turbo run --concurrency=4 format",
+    "lint": "turbo run --concurrency=4 lint",
+    "postinstall": "husky install",
+    "release": "yarn build && changeset publish",
+    "test": "turbo run --concurrency=4 test",
+    "test:ci": "turbo run --concurrency=2 test -- --maxWorkers=2 --forceExit",
+    "version": "changeset version && yarn install"
+  },
+  "dependencies": {
+    "@changesets/cli": "^2.27.1",
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@commitlint/config-lerna-scopes": "^19.0.0",
+    "@manypkg/cli": "^0.21.4",
+    "husky": "^8.0.0"
+  }
 }
